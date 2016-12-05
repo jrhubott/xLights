@@ -130,7 +130,8 @@ void InitialiseLogging(bool fromMain)
     {
 
 #ifdef __WXMSW__
-        std::string initFileName = "xlights.windows.properties";
+        std::string initFileName = wxGetCwd() + "\\xlights.windows.properties";
+
 #endif
 #ifdef __WXOSX_MAC__
         std::string initFileName = "xlights.mac.properties";
@@ -162,6 +163,8 @@ void InitialiseLogging(bool fromMain)
                 log4cpp::PropertyConfigurator::configure(initFileName);
             }
             catch (log4cpp::ConfigureFailure& e) {
+
+				std::string strError = e.what();
                 // ignore config failure ... but logging wont work
                 printf("Log issue:  %s\n", e.what());
             }
