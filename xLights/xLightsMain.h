@@ -149,7 +149,7 @@ wxDECLARE_EVENT(EVT_PROMOTE_EFFECTS, wxCommandEvent);
 wxDECLARE_EVENT(EVT_RGBEFFECTS_CHANGED, wxCommandEvent);
 
 static const wxString xlights_base_name       = "xLights";
-static const wxString xlights_qualifier       = "BETA"; // " BETA";
+static const wxString xlights_qualifier       = "Jason"; // " BETA";
 static const wxString xlights_version_string  = "2016.53";
 static const wxString xlights_build_date      = "Nov 19, 2016";
 
