@@ -150,8 +150,8 @@ wxDECLARE_EVENT(EVT_RGBEFFECTS_CHANGED, wxCommandEvent);
 
 static const wxString xlights_base_name       = "xLights";
 static const wxString xlights_qualifier       = "Jason"; // " BETA";
-static const wxString xlights_version_string  = "2016.53";
-static const wxString xlights_build_date      = "Nov 19, 2016";
+static const wxString xlights_version_string  = "2016.54";
+static const wxString xlights_build_date      = "Dec 14, 2016";
 
 static const wxString strSupportedFileTypes = "LOR Music Sequences (*.lms)|*.lms|LOR Animation Sequences (*.las)|*.las|HLS hlsIdata Sequences(*.hlsIdata)|*.hlsIdata|Vixen Sequences (*.vix)|*.vix|Glediator Record File (*.gled)|*.gled)|Lynx Conductor Sequences (*.seq)|*.seq|xLights Sequences(*.xseq)|*.xseq|xLights Imports(*.iseq)|*.iseq|Falcon Pi Player Sequences (*.fseq)|*.fseq";
 static const wxString strSequenceSaveAsFileTypes = "xLights Sequences(*.xml)|*.xml";
@@ -311,7 +311,6 @@ public:
     PerspectiveId perspectives[10];
     void OnMenuItemLoadPerspectiveSelected(wxCommandEvent& event);
 	bool SaveEffectsFile(bool backup = false);
-    void SaveFPPchannelmemorymaps(std::string path);
     void MarkEffectsFileDirty();
     void CheckUnsavedChanges();
     void SetStatusText(const wxString &msg, int section = 0);
@@ -901,7 +900,13 @@ private:
     void SetupNullOutput(wxXmlNode* e, int after = -1);
     bool SaveNetworksFile();
     void NetworkChange();
-    void SaveFPPUniverses(std::string path);
+    std::list<wxXmlNode> GetOutputsForController(const std::string ip);
+    std::list<int> GetSelectedOutputs(wxString& ip);
+    void UploadFPPBridgeInput();
+    void UploadFPPBridgeOutput();
+    void UploadFalconInput();
+    void UploadFalconOutput();
+
     void DeleteSelectedNetworks();
     void ActivateSelectedNetworks(bool active);
     void ChangeSelectedNetwork();
@@ -945,6 +950,7 @@ public:
     void ReadXlightsFile(const wxString& FileName, wxString *mediaFilename = NULL);
     void ReadFalconFile(const wxString& FileName, ConvertDialog* convertdlg); // = NULL);
     void WriteFalconPiFile(const wxString& filename); //  Falcon Pi Player *.pseq
+    wxXmlNode* GetNetworksXMLRoot() { return NetworkXML.GetRoot(); };
 
 private:
 
@@ -1281,6 +1287,13 @@ private:
     static const long ID_NETWORK_ACTIVATE;
     static const long ID_NETWORK_DEACTIVATE;
     static const long ID_NETWORK_OPENCONTROLLER;
+    static const long ID_NETWORK_UPLOADCONTROLLER;
+    static const long ID_NETWORK_UCOUTPUT;
+    static const long ID_NETWORK_UCINPUT;
+    static const long ID_NETWORK_UCIFPPB;
+    static const long ID_NETWORK_UCOFPPB;
+    static const long ID_NETWORK_UCIFALCON;
+    static const long ID_NETWORK_UCOFALCON;
 
 #define isRandom(ctl)  isRandom_(ctl, #ctl) //(buttonState[std::string(ctl->GetName())] == Random)
 

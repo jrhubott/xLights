@@ -8,9 +8,18 @@ Issue Tracker is found here: www.github.com/smeighan/xLights/issues
 
 XLIGHTS/NUTCRACKER RELEASE NOTES:
 ---------------------------------
+   -- enh (keithsw) Add fireworks fire with timing mark
+   -- enh (keithsw) Add flip to colour curve
+   -- enh (Keithsw) Detect multiple outputs sending data to the same place in check sequence
+   -- enh (keithsw) Input config upload to FPP for bridge mode
+   -- enh (keithsw) Input config upload to falcon controllers
+   -- enh (keithsw) Output config upload to falcon controllers
+2016.54  Dec 14, 2016
+   -- bug (dkulp) Make sure we have a valid show directory at startup... too many crashes occur without one
+   -- bug (dkulp) Fix bugs with file based dimming curves
    -- enh (gjones) Add ability to time shift all effects in a sequence under Edit menu.
    -- enh (dkulp) Basic TouchBar support on latest MacBookPros
-   -- bag (dkulp) Don't crash if an invalid model or submodel causes a buffer to be size 0
+   -- bug (dkulp) Don't crash if an invalid model or submodel causes a buffer to be size 0
    -- bug (dkulp) Don't crash if special characters are using timing track labels. Fixes #762
    -- bug (dkulp) Fix crash if sequence has % in name
    -- bug (keithsw) Fix video effect crash on Mac
