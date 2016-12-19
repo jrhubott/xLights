@@ -717,8 +717,8 @@ void xLightsFrame::SelectedEffectChanged(SelectedEffectChangedEvent& event)
             // KW - A proposal ... I really think we should reset these 2 panels when the user changes effects.
             // While effect settings and colours are often reused I think if you are changing effects more often you are looking
             // to reset these settings.
-            //timingPanel->SetDefaultControls(nullptr);
-            //bufferPanel->SetDefaultControls(nullptr);
+            timingPanel->SetDefaultControls(nullptr);
+            bufferPanel->SetDefaultControls(nullptr);
         } else {
             event.updateUI = false;
         }
@@ -1442,6 +1442,7 @@ void xLightsFrame::SetEffectControls(const std::string &modelName, const std::st
         static log4cpp::Category &logger_base = log4cpp::Category::getInstance(std::string("log_base"));
         logger_base.warn("Setting effect controls for unknown effect type: %s", (const char *)effectName.c_str());
     }
+    colorPanel->LockTimeCC(!ef->SupportsSpatialColorCurves());
 }
 
 void xLightsFrame::ApplySetting(wxString name, wxString value)
