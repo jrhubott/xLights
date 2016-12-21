@@ -71,10 +71,12 @@ void PinwheelEffect::Render(Effect *effect, const SettingsMap &SettingsMap, Rend
     colorarray.resize(pinwheel_arms);
     for (int i=0;i< pinwheel_arms;i++) { colorarray[i]=i%buffer.GetColorCount(); }
 
-    xc= (int)(std::max(buffer.BufferWi, buffer.BufferHt)/2);
+    xc= (int)(ceil(std::hypot(buffer.BufferWi, buffer.BufferHt)/2));
 
     double pos = (buffer.curPeriod - buffer.curEffStartPer) * pspeed * buffer.frameTimeInMs / 50;
 
+    xc_adj = xc_adj*buffer.BufferWi/200;
+    yc_adj = yc_adj*buffer.BufferHt/200;
     int degrees_per_arm=1;
     if(pinwheel_arms>0) degrees_per_arm= 360/pinwheel_arms;
     float armsize = (pinwheel_armsize/100.0);
@@ -100,7 +102,7 @@ void PinwheelEffect::Render(Effect *effect, const SettingsMap &SettingsMap, Rend
                 theta = theta + 180.0;
                 int t2 = (int)theta%degrees_per_arm;
                 if (t2 <= tmax) {
-                    t2 = abs(t2 - (tmax/2)) * 2;
+                    t2 = std::abs(t2 - (tmax/2)) * 2;
                     int ColorIdx2 = ((int)((theta/degrees_per_arm)))%pinwheel_arms;
                     buffer.palette.GetHSV(colorarray[ColorIdx2], hsv);
                     hsv1=hsv;

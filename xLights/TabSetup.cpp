@@ -1373,7 +1373,6 @@ std::list<wxXmlNode> xLightsFrame::GetOutputsForController(const std::string onl
     std::list<wxXmlNode> res;
 
     wxXmlNode* e = NetworkXML.GetRoot();
-    long count = 1;
 
     for (e = e->GetChildren(); e != nullptr; e = e->GetNext())
     {
@@ -1551,6 +1550,7 @@ void xLightsFrame::OnGridNetworkItemRClick(wxListEvent& event)
     mnuAdd->Append(ID_NETWORK_ADDNULL, "NULL")->Enable(selcnt == 1);
     mnuAdd->Append(ID_NETWORK_ADDE131, "E1.31")->Enable(selcnt == 1);
     mnuAdd->Append(ID_NETWORK_ADDARTNET, "ArtNET")->Enable(selcnt == 1);
+    mnuAdd->Connect(wxEVT_MENU, (wxObjectEventFunction)&xLightsFrame::OnNetworkPopup, NULL, this);
 
     wxMenu* mnuUploadController = new wxMenu();
 
@@ -1725,6 +1725,7 @@ void xLightsFrame::OnGridNetworkItemRClick(wxListEvent& event)
         bech->Enable(false);
     }
     mnuBulkEdit->Append(ID_NETWORK_BEDESCRIPTION, "Description")->Enable(selcnt > 0);
+    mnuBulkEdit->Connect(wxEVT_MENU, (wxObjectEventFunction)&xLightsFrame::OnNetworkPopup, NULL, this);
 
     mnu.Append(ID_NETWORK_ADD, "Insert After", mnuAdd, "");
     mnu.Append(ID_NETWORK_BULKEDIT, "Bulk Edit", mnuBulkEdit, "");
